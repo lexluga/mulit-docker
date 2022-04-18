@@ -42,7 +42,7 @@ jobs:
 
 
     - name: Test Before Install
-      run: docker build -t lexluga/react-test -f ././client/Dockerfile.dev .
+      run: docker build -f ./client/Dockerfile.dev -t lexluga/react-test .
 
     - name: After Install
       run: docker run lexluga/react-test npm test -- --coverage
@@ -50,19 +50,19 @@ jobs:
 
     - name: Build Docker Client
       run: | 
-        docker build -t lexluga/client:1.0.0 ./client 
+        docker build ./client -t lexluga/client:1.0.0 
 
     - name: Build Nginx Server
       run: | 
-        docker build -t lexluga/nginx:1.0.0 ./nginx
+        docker build ./nginx -t lexluga/nginx:1.0.0 
 
     - name: Build API Server
       run: |
-        docker build -t lexluga/server:1.0.0 ./server
+        docker build ./server -t lexluga/server:1.0.0 
 
     - name: Build Worker Process
       run: |
-        docker build -t lexluga/worker:1.0.0 ./worker 
+        docker build ./worker -t lexluga/worker:1.0.0 
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
