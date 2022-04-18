@@ -42,7 +42,7 @@ jobs:
 
 
     - name: Test Before Install
-      run: docker build -f ./client/Dockerfile.dev -t lexluga/react-test .
+      run: docker build ./client -t lexluga/react-test .
 
     - name: After Install
       run: docker run lexluga/react-test npm test -- --coverage
