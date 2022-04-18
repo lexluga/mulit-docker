@@ -14,9 +14,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # strategy:
-    #   matrix:
-    #     node-version: [ 14.x ]
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
 
     steps:
     - name: Cache Docker layers
@@ -43,7 +43,7 @@ jobs:
 
     - name: Test Before Install
       run: |
-        docker build -t lexluga/react-test -f ./client/Dockerfile.dev
+        docker run -t lexluga/react-test -f ./client/Dockerfile.dev
 
     - name: After Install
       run: |
