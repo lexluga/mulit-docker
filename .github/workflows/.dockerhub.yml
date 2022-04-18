@@ -19,13 +19,13 @@ jobs:
         node-version: [ 14.x ]
 
     steps:
-    - name: Cache Docker layers
-      uses: actions/cache@v2
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
+    # - name: Cache Docker layers
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: /tmp/.buildx-cache
+    #     key: ${{ runner.os }}-buildx-${{ github.sha }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-buildx-
 
    
     - name: Check Out Repo 
@@ -43,7 +43,7 @@ jobs:
 
     - name: Test Before Install
       run: |
-        docker run -t lexluga/react-test -f ./client/Dockerfile.dev
+        docker build -t lexluga/react-test -f ./client/Dockerfile.dev
 
     - name: After Install
       run: |
