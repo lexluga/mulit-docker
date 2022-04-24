@@ -16,19 +16,19 @@ jobs:
     - name: Check Out Repo 
       uses: actions/checkout@v2
 
+    - name: Docker Login
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
     - name: Test Before Install
       run: docker build . --file ./client/Dockerfile.dev -t lexluga/react-test 
 
     - name: After Install
       run: |
         docker run lexluga/react-test npm test -- --coverage
-
-    - name: Docker Login
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
     - name: Build Docker Client
       run: | 
