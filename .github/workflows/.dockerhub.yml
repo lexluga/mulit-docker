@@ -20,21 +20,31 @@ jobs:
 
     steps:
 
-    # - name: Cache Docker layers
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: /tmp/.buildx-cache
-    #     key: ${{ runner.os }}-buildx-${{ github.sha }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-buildx-
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
 
    
     - name: Check Out Repo 
       uses: actions/checkout@v2
 
 
-    - name: Test Before Install
-      run: docker build . --file ./client/Dockerfile -t lexluga/react-test 
+    # - name: Test Before Install
+    #   run: docker build . --file ./client/Dockerfile.dev
+    #    -t lexluga/react-test 
+
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ./client/Dockerfile.dev
+        push: true
+        tags: lexluga/react-test 
+
 
     - name: After Install
       run: |
