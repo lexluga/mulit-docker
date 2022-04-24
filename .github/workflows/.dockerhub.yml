@@ -34,20 +34,11 @@ jobs:
 
 
     # - name: Test Before Install
-    #   run: docker build . --file ./client/Dockerfile.dev
-    #    -t lexluga/react-test 
+    #   run: docker build . --file ./client/Dockerfile.dev -t lexluga/react-test 
 
-
-    - name: Build and push
-      uses: docker/build-push-action@v2
-      with:
-        context: ./client/Dockerfile.dev
-        push: true
-        tags: lexluga/react-test 
-
-    - name: After Install
-      run: |
-        docker run lexluga/react-test npm test -- --coverage
+    # - name: After Install
+    #   run: |
+    #     docker run lexluga/react-test npm test -- --coverage
 
 
     - name: Build Docker Client
