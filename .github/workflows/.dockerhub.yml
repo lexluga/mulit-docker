@@ -8,37 +8,20 @@ on:
   pull_request:
     branches: [ main ]
   
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    # strategy:
-    #   matrix:
-    #     node-version: [ 14.x ]
-
     steps:
-
-    - name: Cache Docker layers
-      uses: actions/cache@v2
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
-
    
     - name: Check Out Repo 
       uses: actions/checkout@v2
 
+    - name: Test Before Install
+      run: docker build . --file ./client/Dockerfile.dev -t lexluga/react-test 
 
-    # - name: Test Before Install
-    #   run: docker build . --file ./client/Dockerfile.dev -t lexluga/react-test 
-
-    # - name: After Install
-    #   run: |
-    #     docker run lexluga/react-test npm test -- --coverage
+    - name: After Install
+      run: |
+        docker run lexluga/react-test npm test -- --coverage
 
     - name: Docker Login
       env:
