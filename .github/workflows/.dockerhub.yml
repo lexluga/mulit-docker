@@ -1,4 +1,4 @@
-name: CI to Multiple Docker Builds
+name: CI for Multiple Docker Images
 
 on:
   push:
@@ -61,6 +61,14 @@ jobs:
         docker push lexluga/multi-server
         docker push lexluga/multi-worker
 
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+   
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
