@@ -24,7 +24,7 @@ jobs:
     #   run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
     - name: Test Before Install
-      run: docker build . --file ./client/Dockerfile.dev -t lexluga/react-test 
+      run: docker build -t lexluga/react-test -f ./client/Dockerfile.dev 
 
     - name: After Install
       run: |
