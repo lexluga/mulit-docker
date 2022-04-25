@@ -34,19 +34,19 @@ jobs:
 
     - name: Build Docker Client
       run: | 
-        docker build -t lexluga/client:1.0.0 ./client 
+        docker build -t lexluga/multi-client ./client 
 
     - name: Build Nginx Server
       run: | 
-        docker build -t lexluga/nginx:1.0.0 ./nginx
+        docker build -t lexluga/multi-nginx ./nginx
 
     - name: Build API Server
       run: |
-        docker build -t lexluga/server:1.0.0 ./server
+        docker build -t lexluga/multi-server ./server
 
     - name: Build Worker Process
       run: |
-        docker build -t lexluga/worker:1.0.0 ./worker
+        docker build -t lexluga/multi-worker ./worker
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -55,17 +55,12 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Publish to Docker Hub
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
-        push: true
-        cache: enabled
-        tags: lexluga/multi-docker:latest
-        cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,dest=/tmp/.buildx-cache 
-        
+      run : | 
+        docker push lexluga/multi-client
+        docker push lexluga/multi-worker
+        docker push lexluga/multi-server
+        docker push lexluga/multi-worker
+
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
