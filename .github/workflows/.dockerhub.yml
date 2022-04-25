@@ -23,12 +23,12 @@ jobs:
 
     #   run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: Test Before Install
+    - name: Build Docker Test Image 
       run: docker build -t lexluga/react-test -f ./client/Dockerfile.dev ./client
 
-    - name: After Install
-      run: |
-        docker run lexluga/react-test npm test -- --coverage
+    - name: Test Image After Install
+      run: docker run lexluga/react-test npm test -- --coverage
+
 
     - name: Build Docker Client
       run: | 
