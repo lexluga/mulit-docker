@@ -6,6 +6,8 @@ RUN ls -a
 
 COPY package.json .
 
+RUN mkdir /app/node_modules/.cache && chmod -R 777 /app/node_modules/.cache
+
 RUN npm install 
 
 COPY . .
