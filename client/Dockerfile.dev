@@ -2,13 +2,12 @@ FROM node:alpine
 
 WORKDIR /app
 
-RUN ls -all
+RUN ls -a
 
-COPY  [ "package.json", \
-    "./"]
+COPY package.json .
 
 RUN npm install 
 
-COPY . /app/
+COPY . .
 
 CMD ["npm", "run", "start"]
