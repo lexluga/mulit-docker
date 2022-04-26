@@ -57,7 +57,7 @@ jobs:
     - name: Publish to Docker Hub
       run : | 
         docker push lexluga/multi-client
-        docker push lexluga/multi-worker
+        docker push lexluga/multi-nginx
         docker push lexluga/multi-server
         docker push lexluga/multi-worker
 
