@@ -27,7 +27,7 @@ jobs:
 
     - name: Test Image After Install
       run: |
-        docker run -e CI=true lexluga/react-test npm run test -- --coverage
+        docker run -e CI=true lexluga/react-test npm test -- --coverage
 
 
     - name: Build Docker Client
