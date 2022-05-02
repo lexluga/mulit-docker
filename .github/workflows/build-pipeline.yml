@@ -73,7 +73,9 @@ jobs:
         replace-with: '-'
         flags: 'g'
 
-
+    - name: Upload package to S3 bucket
+      run: aws s3 cp deploy_package.zip s3://multi-docker/
+      
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v20
       with:
