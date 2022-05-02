@@ -1,4 +1,4 @@
-name: CI for Multiple Docker Images
+name: CI/CD for Multiple Docker Containers
 
 on:
   push:
@@ -73,9 +73,8 @@ jobs:
         replace-with: '-'
         flags: 'g'
 
-
     - name: Generate deployment package
-      run: zip -r deploy.zip . -x '*.git*'
+      run: zip -r deploy.zip *
       
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v20
@@ -87,6 +86,9 @@ jobs:
         version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
         region: us-east-2
         deployment_package: deploy.zip
+
+    - name: Deployed!
+      run: echo App deployed to ELB
      
 
   
