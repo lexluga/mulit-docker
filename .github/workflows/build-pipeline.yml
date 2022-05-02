@@ -59,16 +59,20 @@ jobs:
         docker push lexluga/multi-server
         docker push lexluga/multi-worker
 
-    - name: Cache Docker layers
-      uses: actions/cache@v2
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v20
       with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
-   
-    - name: Image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: multi-docker
+        environment_name: Multidocker-env-1
+        version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
+        region: us-east-2
+        deployment_package: deploy.zip
+     
+
+  
 
 
-    
+     
