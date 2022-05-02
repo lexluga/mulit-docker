@@ -85,7 +85,8 @@ jobs:
         environment_name: Multidocker-env-1
         version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
         region: us-east-2
-        deployment_package: deploy.zip
+        tags: deploy.zip:latest
+        deployment_package: deploy.zip:latest
 
     - name: Deployed!
       run: echo App deployed to ELB
