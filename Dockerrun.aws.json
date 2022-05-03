@@ -6,7 +6,7 @@
             "image": "lexluga/multi-client",
             "hostname": "client",
             "essential": false,
-            "memory": 512
+            "memory": 256
             
         },
 
@@ -15,7 +15,7 @@
             "image": "lexluga/multi-server",
             "hostname": "api",
             "essential": false,
-            "memory": 512
+            "memory": 256
         }, 
 
         {
@@ -23,7 +23,7 @@
             "image": "lexluga/multi-worker",
             "hostname": "worker",
             "essential": false,
-            "memory": 512
+            "memory": 256
         },
 
         {
@@ -38,7 +38,7 @@
                 }
             ],
             "links": ["client", "server"],
-            "memory": 512
+            "memory": 256
         }
     ]
     

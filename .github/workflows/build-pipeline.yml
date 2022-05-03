@@ -86,7 +86,6 @@ jobs:
         environment_name: Multidocker-env
         version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
         region: us-east-2
-        bucket_name: multi-docker
         deployment_package: deploy.zip
 
     - name: Deployed!
